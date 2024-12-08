@@ -5,32 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leave Calculation Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #007BFF;
+    }
+    
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto; /* Allow horizontal scrolling */
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px; /* Ensure table is wider than the viewport on small screens */
+    }
+    
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: center;
+        white-space: nowrap; /* Prevent text from wrapping */
+    }
+    
+    a {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #007BFF;
+    }
+    
+    /* Media query for mobile devices */
+    @media (max-width: 600px) {
+        .container {
+            padding: 5px;
+        }
+    
+        th, td {
+            padding: 5px;
+        }
+    }</style>
 </head>
 <body>
     <div class="container">
         <h1>Leave Calculation Results</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Month</th>
-                    <th>Leaves Taken</th>
-                    <th>Paid Leaves</th>
-                    <th>Unpaid Leaves</th>
-                    <th>Remaining Leaves</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in data %}
-                <tr>
-                    <td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Leaves Taken</th>
+                        <th>Paid Leaves</th>
+                        <th>Unpaid Leaves</th>
+                        <th>Remaining Leaves</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <a href="/">Back to Home</a>
     </div>
 </body>
