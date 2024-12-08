@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Leave Management System</h1>
+        <form action="/calculate" method="post">
+            <label for="total_leaves">Total Leaves:</label>
+            <input type="number" id="total_leaves" name="total_leaves" required>
+            
+            <label for="leaves_per_month">Leaves Per Month:</label>
+            <input type="number" id="leaves_per_month" name="leaves_per_month" required>
+            
+            <label for="num_months">Number of Months:</label>
+            <input type="number" id="num_months" name="num_months" required>
+            
+            <div id="monthly-leaves"></div>
+            
+            <button type="button" onclick="generateMonthInputs()">Generate Months</button>
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
+    
+    <script>
+        function generateMonthInputs() {
+            const numMonths = document.getElementById('num_months').value;
+            const container = document.getElementById('monthly-leaves');
+            container.innerHTML = ''; // Clear previous inputs
+            
+            for (let i = 1; i <= numMonths; i++) {
+                const label = document.createElement('label');
+                label.textContent = `Leaves for Month ${i}:`;
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.name = `leaves_month_${i}`;
+                input.required = true;
+                container.appendChild(label);
+                container.appendChild(input);
+            }
+        }
+    </script>
+</body>
+</html>
