@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leave Management</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .month-input {
+            margin-bottom: 10px;
+        }
+        .month-input label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .month-input input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -22,7 +36,7 @@
             <div id="monthly-leaves"></div>
             
             <button type="button" onclick="generateMonthInputs()">Generate Months</button>
-            <button type="submit">Calculate</button>
+            <button type="submit" id="calculate-button" disabled>Calculate</button>
         </form>
     </div>
     
@@ -33,15 +47,24 @@
             container.innerHTML = ''; // Clear previous inputs
             
             for (let i = 1; i <= numMonths; i++) {
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'month-input';
+                
                 const label = document.createElement('label');
                 label.textContent = `Leaves for Month ${i}:`;
+                
                 const input = document.createElement('input');
                 input.type = 'number';
                 input.name = `leaves_month_${i}`;
                 input.required = true;
-                container.appendChild(label);
-                container.appendChild(input);
+                
+                monthDiv.appendChild(label);
+                monthDiv.appendChild(input);
+                container.appendChild(monthDiv);
             }
+            
+            // Enable the Calculate button after generating month inputs
+            document.getElementById('calculate-button').disabled = false;
         }
     </script>
 </body>
